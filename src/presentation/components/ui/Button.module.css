@@ -1,0 +1,131 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  height: 2rem;
+  padding: 0 var(--space-3);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background-color 120ms var(--ease),
+    border-color 120ms var(--ease),
+    color 120ms var(--ease),
+    transform 80ms var(--ease);
+}
+
+.button:active:not(:disabled) {
+  transform: translateY(0.5px);
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  background: var(--surface-muted);
+  border-color: var(--border);
+  color: var(--text-subtle);
+  opacity: 0.8;
+}
+
+.small {
+  height: 1.75rem;
+  padding: 0 var(--space-2);
+  font-size: var(--text-xs);
+}
+
+.iconOnly {
+  width: 2rem;
+  padding: 0;
+}
+
+.small.iconOnly {
+  width: 1.75rem;
+}
+
+.primary {
+  background: var(--text);
+  color: var(--bg);
+}
+.primary:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--text) 84%, var(--bg));
+}
+
+.secondary {
+  background: var(--surface);
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+.secondary:hover:not(:disabled) {
+  background: var(--surface-hover);
+}
+.secondary:active:not(:disabled) {
+  background: var(--surface-active);
+}
+
+.tertiary {
+  background: transparent;
+  color: var(--text-muted);
+}
+.tertiary:hover:not(:disabled) {
+  background: var(--surface-hover);
+  color: var(--text);
+}
+.tertiary:active:not(:disabled) {
+  background: var(--surface-active);
+}
+.tertiary:disabled {
+  background: transparent;
+  border-color: transparent;
+}
+
+.destructive {
+  background: var(--surface);
+  border-color: var(--border-strong);
+  color: var(--danger);
+}
+.destructive:hover:not(:disabled) {
+  background: var(--danger-soft);
+  border-color: color-mix(in srgb, var(--danger) 45%, var(--border-strong));
+}
+
+.destructive-solid {
+  background: var(--danger);
+  color: var(--bg);
+}
+.destructive-solid:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--danger) 86%, var(--text));
+}
+
+.kbd {
+  margin-left: var(--space-1);
+}
+
+.primary .kbd {
+  color: color-mix(in srgb, var(--bg) 75%, transparent);
+  border-color: color-mix(in srgb, var(--bg) 30%, transparent);
+  background: transparent;
+}
+
+/* Touch devices: larger targets, no keyboard hints. */
+@media (pointer: coarse) {
+  .button {
+    height: 2.75rem;
+  }
+  .iconOnly {
+    width: 2.75rem;
+  }
+  .small {
+    height: 2.5rem;
+  }
+  .small.iconOnly {
+    width: 2.5rem;
+  }
+  .kbd {
+    display: none;
+  }
+}

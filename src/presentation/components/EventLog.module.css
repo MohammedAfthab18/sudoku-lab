@@ -1,0 +1,58 @@
+.log {
+  height: calc(8 * 1.5rem + 2px);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 3.25rem 4.25rem 1fr;
+  align-items: center;
+  height: 1.5rem;
+  padding-inline: var(--space-2);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.item[data-latest] {
+  background: var(--surface-muted);
+  color: var(--text);
+}
+
+.step {
+  color: var(--text-subtle);
+  font-variant-numeric: tabular-nums;
+}
+
+.kind {
+  font-weight: 600;
+}
+
+.item[data-type="assign"] .kind {
+  color: var(--explore-try);
+}
+.item[data-type="backtrack"] .kind {
+  color: var(--explore-undo);
+}
+.item[data-type="dead-end"] .kind {
+  color: var(--explore-dead);
+}
+.item[data-type="solved"] .kind {
+  color: var(--success);
+}
+
+.what {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.empty {
+  padding: var(--space-2);
+  color: var(--text-subtle);
+  font-family: var(--font-sans);
+  white-space: normal;
+}

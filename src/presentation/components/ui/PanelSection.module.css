@@ -1,0 +1,28 @@
+.section {
+  display: grid;
+  gap: var(--space-3);
+  padding-block: var(--space-5);
+  border-top: 1px solid var(--border);
+}
+
+.section:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 1.5rem;
+}
+
+.headHidden {
+  display: contents;
+}
+
+.title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: var(--lh-sm);
+}

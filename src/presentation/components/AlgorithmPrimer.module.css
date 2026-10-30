@@ -1,0 +1,82 @@
+.primer {
+  padding-block: var(--space-6) var(--space-7);
+  border-top: 1px solid var(--border);
+}
+
+.heading {
+  margin-bottom: var(--space-5);
+  font-size: var(--text-base);
+  font-weight: 600;
+}
+
+.columns {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.sub {
+  margin-bottom: var(--space-3);
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.steps {
+  display: grid;
+  gap: var(--space-2);
+  counter-reset: step;
+  font-size: var(--text-sm);
+  max-width: 34rem;
+}
+
+.steps li {
+  position: relative;
+  padding-left: var(--space-5);
+  counter-increment: step;
+  text-wrap: pretty;
+}
+
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  color: var(--text-subtle);
+  font-variant-numeric: tabular-nums;
+}
+
+.layers {
+  display: grid;
+  max-width: 34rem;
+  font-size: var(--text-sm);
+}
+
+.layers > div {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: var(--space-3);
+  padding-block: var(--space-2);
+  border-bottom: 1px solid var(--border);
+}
+
+.layers dt {
+  font-weight: 500;
+}
+
+.layers dd {
+  color: var(--text-muted);
+}
+
+.note {
+  margin-top: var(--space-3);
+  max-width: 34rem;
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  text-wrap: pretty;
+}
+
+@media (min-width: 60rem) {
+  .columns {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-7);
+  }
+}

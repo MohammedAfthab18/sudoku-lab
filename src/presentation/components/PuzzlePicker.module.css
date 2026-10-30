@@ -1,0 +1,22 @@
+.next {
+  width: 100%;
+}
+
+.tests {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-2);
+}
+
+.testsLabel {
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+}
+
+.testButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-left: calc(-1 * var(--space-2));
+}

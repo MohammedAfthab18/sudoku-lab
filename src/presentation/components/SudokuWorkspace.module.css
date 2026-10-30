@@ -1,0 +1,65 @@
+.workspace {
+  display: grid;
+  gap: var(--space-5);
+  padding-block: var(--space-4) var(--space-6);
+}
+
+.boardColumn {
+  display: grid;
+  gap: var(--space-3);
+  align-content: start;
+  width: 100%;
+  /* The board never outgrows the viewport height, so it stays above the fold. */
+  max-width: max(20rem, min(40rem, calc(100dvh - 15rem)));
+  margin-inline: auto;
+}
+
+.boardHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.heading {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  line-height: var(--lh-lg);
+  letter-spacing: -0.015em;
+}
+
+.meta {
+  display: flex;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.metaSub {
+  color: var(--text-subtle);
+  font-weight: 400;
+}
+
+.panel {
+  width: 100%;
+  max-width: 40rem;
+  margin-inline: auto;
+}
+
+@media (min-width: 60rem) {
+  .workspace {
+    grid-template-columns: minmax(0, 40rem) 22.5rem;
+    justify-content: center;
+    align-items: start;
+    gap: var(--space-7);
+    padding-block: var(--space-5) var(--space-7);
+  }
+  .boardColumn,
+  .panel {
+    margin-inline: 0;
+  }
+  .boardColumn {
+    max-width: none;
+    width: min(100%, max(20rem, calc(100dvh - 15rem)));
+  }
+}

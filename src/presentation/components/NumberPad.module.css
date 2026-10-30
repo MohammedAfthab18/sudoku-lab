@@ -1,0 +1,81 @@
+.pad {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-2);
+}
+
+.key {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.75rem;
+  padding: 0;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 1.125rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition:
+    background-color 100ms var(--ease),
+    color 100ms var(--ease),
+    transform 80ms var(--ease);
+}
+
+@media (hover: hover) {
+  .key:hover:not(:disabled) {
+    background: var(--surface-hover);
+  }
+}
+
+.key:active:not(:disabled) {
+  background: var(--surface-active);
+  transform: translateY(0.5px);
+}
+
+.key:disabled {
+  cursor: not-allowed;
+  color: var(--text-subtle);
+  background: var(--surface-muted);
+  opacity: 0.7;
+}
+
+.key[data-done] {
+  color: var(--text-subtle);
+  background: var(--surface-muted);
+}
+
+.erase {
+  color: var(--text-muted);
+}
+
+.left {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.35rem;
+  color: var(--text-subtle);
+  font-size: 0.625rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+@media (min-width: 36rem) {
+  .pad {
+    grid-template-columns: repeat(10, 1fr);
+    gap: var(--space-1);
+  }
+  .key {
+    height: 2.25rem;
+    font-size: var(--text-base);
+  }
+}
+
+@media (min-width: 36rem) and (pointer: coarse) {
+  .key {
+    height: 2.75rem;
+  }
+}

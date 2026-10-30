@@ -1,0 +1,42 @@
+.status {
+  --tone: var(--text-subtle);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-3);
+  align-items: start;
+  /* Reserve two lines of copy so results appearing never shift the layout. */
+  min-height: 3.25rem;
+}
+
+.status[data-tone="info"] {
+  --tone: var(--accent);
+}
+.status[data-tone="success"] {
+  --tone: var(--success);
+}
+.status[data-tone="warning"] {
+  --tone: var(--warning);
+}
+.status[data-tone="error"] {
+  --tone: var(--danger);
+}
+
+.mark {
+  display: flex;
+  margin-top: 1px;
+  color: var(--tone);
+  transition: color 160ms var(--ease);
+}
+
+.title {
+  font-size: var(--text-base);
+  font-weight: 600;
+  line-height: var(--lh-sm);
+}
+
+.detail {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  line-height: var(--lh-sm);
+  text-wrap: pretty;
+}

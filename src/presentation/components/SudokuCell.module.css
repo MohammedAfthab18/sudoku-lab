@@ -1,0 +1,184 @@
+/*
+ * Grid lines are inset box-shadows, so they never change a cell's content box
+ * and every digit stays optically centred. Box (3x3) lines are 2px, cell lines 1px.
+ */
+.cell {
+  --edge-r: 1px;
+  --edge-b: 1px;
+  --line-r: var(--cell-line);
+  --line-b: var(--cell-line);
+  --ring: transparent;
+  --ring-style: solid;
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  background: var(--cell-bg);
+  color: var(--digit-given);
+  font-size: 5.4cqw;
+  line-height: 1;
+  font-variant-numeric: tabular-nums lining-nums;
+  box-shadow:
+    inset calc(-1 * var(--edge-r)) 0 0 var(--line-r),
+    inset 0 calc(-1 * var(--edge-b)) 0 var(--line-b);
+  outline: 2px var(--ring-style) var(--ring);
+  outline-offset: -2px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition:
+    background-color 90ms var(--ease),
+    color 90ms var(--ease);
+}
+
+.cell[data-box-right] {
+  --edge-r: 2px;
+  --line-r: var(--box-line);
+}
+.cell[data-box-bottom] {
+  --edge-b: 2px;
+  --line-b: var(--box-line);
+}
+.cell[data-last-col] {
+  --edge-r: 0px;
+}
+.cell[data-last-row] {
+  --edge-b: 0px;
+}
+
+.digit {
+  /* Geist digits sit a hair high in a 1-line box; nudge to true optical centre. */
+  transform: translateY(0.02em);
+}
+
+/* ---- Ownership of a digit: weight and colour, never colour alone ---------- */
+.cell[data-source="given"] {
+  color: var(--digit-given);
+  font-weight: 650;
+}
+.cell[data-source="entry"] {
+  color: var(--digit-entry);
+  font-weight: 420;
+}
+.cell[data-source="solved"] {
+  color: var(--digit-solved);
+  font-weight: 500;
+}
+.cell[data-source="search"] {
+  color: var(--digit-search);
+  font-weight: 500;
+}
+.cell[data-source="given"],
+.cell[data-source="solved"] {
+  cursor: default;
+}
+
+/* ---- Interaction ------------------------------------------------------------ */
+@media (hover: hover) {
+  .cell:hover {
+    background: var(--cell-hover);
+  }
+}
+
+.cell[data-related] {
+  background: var(--cell-related);
+}
+.cell[data-match] {
+  background: var(--cell-match);
+}
+.cell[data-selected] {
+  --ring: var(--accent);
+  background: var(--cell-selected);
+  z-index: 1;
+}
+
+.cell:focus {
+  outline-color: var(--ring);
+}
+.cell:focus-visible {
+  --ring: var(--accent);
+  z-index: 2;
+  box-shadow:
+    inset calc(-1 * var(--edge-r)) 0 0 var(--line-r),
+    inset 0 calc(-1 * var(--edge-b)) 0 var(--line-b),
+    inset 0 0 0 4px var(--surface),
+    inset 0 0 0 5.5px var(--accent);
+}
+
+/* ---- Conflicts: tint, digit colour and a corner mark --------------------- */
+.cell[data-conflict] {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+.cell[data-conflict]::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-style: solid;
+  border-width: 0 0.7rem 0.7rem 0;
+  border-color: transparent var(--danger) transparent transparent;
+  opacity: 0.85;
+  pointer-events: none;
+}
+.cell[data-conflict][data-selected] {
+  background: color-mix(in srgb, var(--danger) 16%, var(--cell-selected));
+}
+
+/* ---- Solver playback ---------------------------------------------------- */
+.cell[data-trace="select"] {
+  --ring: var(--explore-select);
+  z-index: 1;
+}
+.cell[data-trace="assign"] {
+  --ring: var(--explore-try);
+  --ring-style: dotted;
+  background: var(--explore-try-bg);
+  color: var(--explore-try);
+  z-index: 1;
+}
+.cell[data-trace="backtrack"] {
+  --ring: var(--explore-undo);
+  --ring-style: dashed;
+  background: var(--explore-undo-bg);
+  z-index: 1;
+  animation: undo-flash 360ms var(--ease);
+}
+.cell[data-trace="dead-end"] {
+  --ring: var(--explore-dead);
+  background: var(--explore-dead-bg);
+  z-index: 1;
+}
+
+@keyframes undo-flash {
+  from {
+    background: color-mix(in srgb, var(--explore-undo) 35%, var(--surface));
+  }
+}
+
+.candidates {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 80%;
+  height: 80%;
+  color: var(--text-muted);
+  font-size: max(0.5625rem, 2.2cqw);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.candidates > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deadMark {
+  color: var(--explore-dead);
+  font-size: 0.9em;
+  font-weight: 500;
+  opacity: 0.8;
+}
